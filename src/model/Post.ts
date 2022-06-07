@@ -7,6 +7,12 @@ const postSchema = new Schema({
   body: {
     type: String
   },
+  comment:[
+    {
+      type: Schema.Types.ObjectId,
+      ref:'Comment'
+    }
+]
 }, {
   collection: 'post'
 });

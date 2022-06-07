@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import { dbConfig } from './database/db';
 import postRoute from './routes/post.routes';
+import commentRoute from './routes/comment.routes';
 import cors from 'cors';
 
 // import path from 'path';
@@ -27,6 +28,7 @@ app.use(cors());
 
 // API root
 app.use('/api', postRoute);
+app.use('/api', commentRoute);
 
 app.listen(port, () => {
   console.log('Listening on port ' + port);
@@ -43,7 +45,7 @@ app.get('/', (req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err.message);
+  console.error('ERROR: ', err.message);
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
